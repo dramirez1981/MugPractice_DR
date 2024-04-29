@@ -1,5 +1,5 @@
 #!/bin/bash
-response=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080)
+response=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:80)
 if [ "$response" -eq 200 ]; then
 echo "HTTP status test passed!"
 else
