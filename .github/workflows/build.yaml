@@ -54,6 +54,7 @@ jobs:
           tags: |
             ${{ secrets.AZURE_ACR_ENDPOINT }}/${{ env.IMAGE_NAME_main }}:${{ github.sha }}
             ${{ secrets.AZURE_ACR_ENDPOINT }}/${{ env.IMAGE_NAME_main }}:latest
+  
   build-dev:
     name: Build-dev
     runs-on: [ubuntu-latest]
@@ -80,11 +81,11 @@ jobs:
 
       - name: Login into registry
         if: success() # This ensures login only occurs if tests pass
-          uses: docker/login-action@v2
-          with:
-            registry: ${{ secrets.AZURE_ACR_ENDPOINT }}
-            username: ${{ secrets.AZURE_CLIENT_ID }}
-            password: ${{ secrets.AZURE_CLIENT_SECRET }}
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ secrets.AZURE_ACR_ENDPOINT }}
+          username: ${{ secrets.AZURE_CLIENT_ID }}
+          password: ${{ secrets.AZURE_CLIENT_SECRET }}
       
       - name: Build & Push
         if: success() # This ensures build and push only occur if login is successful
